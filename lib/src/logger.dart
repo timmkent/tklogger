@@ -54,16 +54,6 @@ class Logger {
     }
     _singleton.isBusy = false;
   }
-
-  static log(String message) {
-    
-    if (_singleton.apiKey == null) {
-      throw ErrorDescription("_singleton.apiKey not set!");
-    }
-    // ignore: avoid_print
-    print("LOGGING:$message with APIKey:${_singleton.apiKey}");
-  }
-
   static setMaxEntries(int max) {
     _singleton.maxWriteEntries = max;
   }

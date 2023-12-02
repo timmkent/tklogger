@@ -107,18 +107,11 @@ class Logger {
     _logMessage(message, 'info');
   }
 
-  warning(String message) {
+  static warning(String message) {
     _logMessage(message, 'warning');
   }
 
-  error(String message) {
+  static error(String message) {
     _logMessage('⛔️$message', 'error');
-  }
-
-  String logMessageLine(String message) {
-    const liveOrDebug = kDebugMode ? '[DEBUG]' : '[LIVE]';
-    final finalMessage = '$liveOrDebug $version $message';
-    debugPrint(finalMessage);
-    return finalMessage;
   }
 }

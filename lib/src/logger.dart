@@ -46,7 +46,7 @@ class Logger {
 
     final messageBody = queue.first;
     _singleton.isBusy = true;
-    final success = await logToGTA(messageBody);
+    final success = await _logToGTA(messageBody);
 
     if (success) {
       _singleton.lastError = "";
@@ -54,6 +54,7 @@ class Logger {
     }
     _singleton.isBusy = false;
   }
+
   static setMaxEntries(int max) {
     _singleton.maxWriteEntries = max;
   }
@@ -62,7 +63,7 @@ class Logger {
   int sending_errors = 0;
   var doNotAcceptMoreMessages = false;
 
-  static logMessage(String message, String severity) async {
+  static _logMessage(String message, String severity) async {
     assert(_singleton.apiKey != null, "Queue not initialized.");
     if (_singleton.doNotAcceptMoreMessages) {
       print("Queue bloicked.");
@@ -90,7 +91,7 @@ class Logger {
     _singleton.messageQueue.add(body);
   }
 
-  static Future<bool> logToGTA(body) async {
+  static Future<bool> _logToGTA(body) async {
     final url = Uri.parse('http://logger.madetk.com/log?apikey=${_singleton.apiKey}');
     const headers = {'Content-type': 'application/json; charset=UTF-8', 'Accept': '*/*'};
     try {
@@ -103,15 +104,15 @@ class Logger {
   }
 
   static info(String message) {
-    logMessage(message, 'info');
+    _logMessage(message, 'info');
   }
 
   warning(String message) {
-    logMessage(message, 'warning');
+    _logMessage(message, 'warning');
   }
 
   error(String message) {
-    logMessage('⛔️$message', 'error');
+    _logMessage('⛔️$message', 'error');
   }
 
   String logMessageLine(String message) {

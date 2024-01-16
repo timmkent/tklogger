@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'dart:convert';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class Logger {
   static final Logger _singleton = Logger._internal();
@@ -24,7 +25,9 @@ class Logger {
   String lastError = "";
   var isBusy = false;
 
-  static initialize({required String appName, required String apiKey, required String version, required String tkuuid}) {
+  static initialize({required String appName, required String apiKey, required String tkuuid}) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final version = packageInfo.version;
     _singleton.apiKey = apiKey;
     _singleton.appShort = appName;
     _singleton.version = version;

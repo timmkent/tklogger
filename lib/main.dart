@@ -3,13 +3,13 @@ import 'package:tklogger/tklogger.dart';
 
 void main() async {
   runApp(const MyApp());
-  Logger.initialize(apiKey: "3202151", appName: "testapp", version: "0.0.0", tkuuid: 'TKUUIDXXX');
+  Logger.initialize(apiKey: "3202151", appName: "testapp", tkuuid: 'TKUUIDXXX');
   Logger.setMaxEntries(100);
   Logger.info("Test");
   await Future.delayed(Duration(seconds: 1));
-  
+
   await Future.delayed(Duration(seconds: 1));
-  
+
   Logger.info("Test");
   Logger.info("Test");
   Logger.info("Test");
